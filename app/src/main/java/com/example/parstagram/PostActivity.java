@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -30,9 +28,9 @@ import com.parse.SaveCallback;
 import java.io.File;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "PostActivity";
     private EditText etDescription;
     private Button btnCaptureImage;
     private ImageView ivPostImage;
@@ -41,15 +39,17 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_post);
 
         etDescription = findViewById(R.id.etDescription);
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+
 
         //queryPosts();
 
@@ -66,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (photoFile == null) {
-                    Toast.makeText(MainActivity.this, "There is no image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "There is no image", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (ivPostImage.getDrawable() == null) {
-                    Toast.makeText(MainActivity.this, "There is no image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "There is no image", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoFile = getPhotoFileUri(photoFileName);
 
-        Uri fileProvider = FileProvider.getUriForFile(MainActivity.this, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(PostActivity.this, "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error while saving", e);
-                    Toast.makeText(MainActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post was saved");
                 etDescription.setText("");
@@ -165,4 +165,6 @@ public class MainActivity extends AppCompatActivity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         finish();
     }
+
+
 }
