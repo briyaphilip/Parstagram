@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:context=".PostDetailActivity">
+
 
     <TextView
         android:id="@+id/tvUsername"
@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="rahul" />
+        tools:text="rahul"
+        android:layout_marginLeft="5dp"
+        />
 
     <ImageView
         android:id="@+id/ivImage"
@@ -29,7 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         tools:text="trying to look hipster"
-        android:layout_below="@+id/ivImage"/>
+        android:layout_below="@+id/ivImage"
+        android:layout_marginLeft="5dp"
+        />
 
     <TextView
         android:id="@+id/createdAt"
@@ -38,8 +42,8 @@
         android:layout_below="@+id/tvDescription"
         android:text="3 hundred days ago"
         android:textSize="10dp"
+        android:layout_marginLeft="5dp"
         />
-
 
 
 </RelativeLayout>

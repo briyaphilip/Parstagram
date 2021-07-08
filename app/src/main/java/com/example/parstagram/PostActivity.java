@@ -26,6 +26,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 public class PostActivity extends AppCompatActivity {
@@ -139,6 +140,7 @@ public class PostActivity extends AppCompatActivity {
                 Log.i(TAG, "Post was saved");
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+
             }
         });
     }
