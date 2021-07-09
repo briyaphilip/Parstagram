@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Parstagram">
-        <activity android:name=".PostDetailActivity"></activity>
+        <activity android:name=".PostDetailActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -38,8 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FeedActivity"></activity>
-        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".FeedActivity" />
+        <activity android:name=".PostActivity" />
     </application>
 
 </manifest>
