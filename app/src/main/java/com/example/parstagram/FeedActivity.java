@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ public class FeedActivity extends AppCompatActivity {
         private RecyclerView rvPosts;
         private SwipeRefreshLayout swipeContainer;
         private Button postBtn;
+        private EndlessRecyclerViewScrollListener scrollListener;
 
         protected PostsAdapter adapter;
         protected List<Post> allPosts;
@@ -34,6 +36,7 @@ public class FeedActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_feed);
+
 
             swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
             swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -71,6 +74,19 @@ public class FeedActivity extends AppCompatActivity {
             rvPosts.setLayoutManager(new LinearLayoutManager(this));
             // query posts from Parstagram
             queryPosts();
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            rvPosts.setLayoutManager(linearLayoutManager);
+
+            scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+                @Override
+                public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                    queryPosts();
+                }
+            };
+
+            rvPosts.addOnScrollListener(scrollListener);
+
         }
 
 
