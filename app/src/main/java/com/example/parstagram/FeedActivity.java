@@ -1,7 +1,11 @@
 package com.example.parstagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +15,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +25,7 @@ import java.util.List;
 public class FeedActivity extends AppCompatActivity {
         private RecyclerView rvPosts;
         private SwipeRefreshLayout swipeContainer;
+        private Button postBtn;
 
         protected PostsAdapter adapter;
         protected List<Post> allPosts;
@@ -40,6 +48,14 @@ public class FeedActivity extends AppCompatActivity {
                     android.R.color.holo_orange_light,
                     android.R.color.holo_red_light);
 
+            postBtn = findViewById(R.id.postBtn);
+            postBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("TAG", "onClick post button");
+                    startActivity(new Intent(FeedActivity.this, PostActivity.class));
+                }
+            });
 
 
             Log.i("APP", "Feed Activity");
@@ -89,5 +105,13 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onLogoutButton(View view) {
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        finish();
+    }
+
+
 }
 

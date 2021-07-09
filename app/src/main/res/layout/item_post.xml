@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="rahul" />
+        tools:text="rahul"
+        android:textSize="15dp"/>
 
     <ImageView
         android:id="@+id/ivImage"
@@ -40,6 +41,37 @@
         android:textSize="10dp"
         />
 
+    <ImageView
+        android:id="@+id/likeBtn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/createdAt"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ufi_heart"
+       />
+
+    <ImageView
+        android:id="@+id/commentBtn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/createdAt"
+        android:layout_toEndOf="@+id/likeBtn"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ufi_comment" />
+
+    <ImageView
+        android:id="@+id/sendBtn"
+        android:layout_width="25dp"
+        android:layout_height="23dp"
+        android:layout_below="@+id/createdAt"
+        android:layout_toEndOf="@+id/commentBtn"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ufi_new_direct" />
 
 
 </RelativeLayout>

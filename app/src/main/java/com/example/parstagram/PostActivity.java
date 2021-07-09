@@ -39,6 +39,7 @@ public class PostActivity extends AppCompatActivity {
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 44;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    private Button btnFeed;
 
 
     @Override
@@ -50,6 +51,7 @@ public class PostActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnFeed = findViewById(R.id.btnFeed);
 
 
         //queryPosts();
@@ -82,6 +84,15 @@ public class PostActivity extends AppCompatActivity {
                 savePost(description, currentUser, photoFile);
             }
         });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PostActivity.this, FeedActivity.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 

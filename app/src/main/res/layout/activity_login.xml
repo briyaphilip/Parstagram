@@ -7,11 +7,25 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_margin="16dp"
+    android:gravity="center"
+    android:layout_gravity="center"
     tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Parstagram"
+        android:fontFamily="@font/dancing_script"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/etUsername"
-        android:hint="username"
+        android:hint="Phone number, username, or email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -19,7 +33,7 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:hint="password"
+        android:hint="Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
