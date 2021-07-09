@@ -55,14 +55,19 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            goFeedActivity();
+        }
+
     }
 
     private void signUpUser(String username, String password) {
         // Create the ParseUser
         ParseUser user = new ParseUser();
-        user.setUsername("joestevens");
-        user.setPassword("secret123");
-        user.setEmail("email@example.com");
+        user.setUsername(username);
+        user.setPassword(password);
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e != null) {
@@ -89,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void goFeedActivity() {
         Intent i = new Intent(this, FeedActivity.class);
