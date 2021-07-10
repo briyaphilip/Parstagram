@@ -170,11 +170,11 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
-    public void onLogoutButton(View view) {
-        ParseUser.logOut();
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        finish();
-    }
+//    public void onLogoutButton(View view) {
+//        ParseUser.logOut();
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        finish();
+//    }
 
 
 }

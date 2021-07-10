@@ -34,6 +34,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            goFeedActivity();
+        }
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-            goFeedActivity();
-        }
 
     }
 
