@@ -28,6 +28,7 @@ public class FeedActivity extends AppCompatActivity {
         private SwipeRefreshLayout swipeContainer;
         private Button postBtn;
         private EndlessRecyclerViewScrollListener scrollListener;
+        private Button logoutBtn;
 
         protected PostsAdapter adapter;
         protected List<Post> allPosts;
@@ -36,6 +37,14 @@ public class FeedActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_feed);
+
+            logoutBtn = findViewById(R.id.logoutBtn);
+            logoutBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onLogoutButton(v);
+                }
+            });
 
 
             swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
@@ -64,15 +73,11 @@ public class FeedActivity extends AppCompatActivity {
             Log.i("APP", "Feed Activity");
             rvPosts = findViewById(R.id.rvPosts);
 
-            // initialize the array that will hold posts and create a PostsAdapter
             allPosts = new ArrayList<>();
             adapter = new PostsAdapter(this, allPosts);
 
-            // set the adapter on the recycler view
             rvPosts.setAdapter(adapter);
-            // set the layout manager on the recycler view
             rvPosts.setLayoutManager(new LinearLayoutManager(this));
-            // query posts from Parstagram
             queryPosts();
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -91,15 +96,10 @@ public class FeedActivity extends AppCompatActivity {
 
 
     private void queryPosts() {
-        // specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        // include data referred by user key
         query.include(Post.KEY_USER);
-        // limit query to latest 20 items
         query.setLimit(20);
-        // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
-        // start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -109,12 +109,9 @@ public class FeedActivity extends AppCompatActivity {
                     return;
                 }
 
-                // for debugging purposes let's print every post description to logcat
                 for (Post post : posts) {
                     Log.i("TAG", "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
-
-                // save received posts to list and notify adapter of new data
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
